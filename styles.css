@@ -48,16 +48,16 @@
     align-items: stretch;
 }
 
-#row {
-    border: 2px solid #E6B9A6;
+.row {
     flex-grow: 1;
     display: flex;
 }
 
-#col {
-    border: 2px solid #E6B9A6;
+.col {
+    border: 1px solid #E6B9A6;
     margin: -1px 0;
     flex-grow: 1;
+    background-color: #FFF8F3;
 }
 
 #footer {
