@@ -36,6 +36,11 @@
     height: 75%;
     margin-right: 30px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
 }
 
 #grid-container {

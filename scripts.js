@@ -4,6 +4,10 @@
 
 const gridContainer = document.querySelector("#grid-container");
 const gridSize = document.querySelector("#gridSize");
+
+const color = document.querySelector("#chooseColor");
+console.log(color);
+
 let grids = 1;
 console.log(grids);
 
@@ -32,7 +36,13 @@ gridSize.addEventListener('input', (event) => {
     addRows(grids);
 });
 
+color.addEventListener('input', (event) => {
+    color = event.target.value;
+})
 
+col.addEventListener("mouseover", () => {
+    col.style.backgroundColor = color;
+})
 
 
 
