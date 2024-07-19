@@ -50,8 +50,8 @@ const addRows = (grids) => {
             });
             // Shading mode
             shade.addEventListener("click", () => {
-                let opacity = 0.1;
-                if(mode === "normal") {
+                let opacity = 0.2;
+                if(mode === "normal" || mode === '') {
                     col.addEventListener('mouseover', (e) => {
                         e.target.style.backgroundColor = color.value;
                         e.target.style.opacity = opacity;
@@ -63,7 +63,7 @@ const addRows = (grids) => {
                         const randomColor = getRandomColor();
                         e.target.style.backgroundColor = randomColor;
                         e.target.style.opacity = opacity;
-                        opacity += 1;
+                        opacity += 0.1;
                     });
                 }
                 
@@ -73,6 +73,7 @@ const addRows = (grids) => {
     }
 }
 
+addRows(grids);
 
 gridSize.addEventListener('input', (event) => {
     grids = event.target.value;
