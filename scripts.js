@@ -8,12 +8,12 @@ const rainbow = document.querySelector("#rainbow");
 const normal = document.querySelector("#normal");
 const reset = document.querySelector("#reset");
 const color = document.querySelector("#chooseColor");
-
-console.log(color);
+const shade = document.querySelector("#shading");
 
 let grids = 1;
+let mode = '';
 
-function getRandomColor() {
+const getRandomColor = () => {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
@@ -35,17 +35,39 @@ const addRows = (grids) => {
             });
             // Normal Mode
             normal.addEventListener("click", () => {
+                mode = "normal";
                 col.addEventListener('mouseover', (e) => {
                     e.target.style.backgroundColor = color.value;
                 });
             });
             // Rainbow Mode
             rainbow.addEventListener("click", () => {
+                mode = "rainbow";
                 col.addEventListener('mouseover', (e) => {
                     const randomColor = getRandomColor();
                     e.target.style.backgroundColor = randomColor;
-                })
+                });
             });
+            // Shading mode
+            shade.addEventListener("click", () => {
+                let opacity = 0.1;
+                if(mode === "normal") {
+                    col.addEventListener('mouseover', (e) => {
+                        e.target.style.backgroundColor = color.value;
+                        e.target.style.opacity = opacity;
+                        opacity += 0.1;
+                    })
+                }
+                else if(mode === "rainbow") {
+                    col.addEventListener('mouseover', (e) => {
+                        const randomColor = getRandomColor();
+                        e.target.style.backgroundColor = randomColor;
+                        e.target.style.opacity = opacity;
+                        opacity += 1;
+                    });
+                }
+                
+            })
         }
         gridContainer.appendChild(row);
     }
