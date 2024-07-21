@@ -22,8 +22,6 @@ const getRandomColor = () => {
     }
     return color;
   }
-
-
   
 const addRows = (grids) => {
     for(let i=1; i<=grids; i++) {
@@ -36,11 +34,12 @@ const addRows = (grids) => {
 
             let normalListener = (e) => {
                 e.target.style.backgroundColor = color.value;
+                e.target.style.opacity = 1;
             }
             let rainbowListener;
             let shadeListener;
 
-            //Default
+            // Default
             col.addEventListener('mouseover', normalListener);
 
             // Normal Mode
@@ -101,6 +100,15 @@ color.addEventListener('input', (event) => {
     color = event.target.value;
 });
 
+const resetColor = () => {
+    const cells = document.querySelectorAll(".col");
+    cells.forEach(cell => {
+        cell.style.backgroundColor = ""; // Reset to default background color
+        cell.style.opacity = ""; // Reset to default opacity
+    });
+}
+
+reset.addEventListener("click", resetColor);
 
 
 

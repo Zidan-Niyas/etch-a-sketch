@@ -23,7 +23,7 @@
 #container {
     height: 80vh;
     width: 70%;
-    border: 2px solid #2F3645;
+    /* border: 2px solid #2F3645; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,6 +31,7 @@
 
 #controls {
     border: 2px solid #E6B9A6;
+    border-radius: 10px;
     background-color: #EEEDEB;
     width: 25%;
     height: 75%;
@@ -38,9 +39,13 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     padding: 20px;
+}
+
+#controls div {
+    margin: 15px 0;
 }
 
 #grid-container {
@@ -66,13 +71,36 @@
 }
 
 #footer {
-    border: 2px solid #2F3645;
+    /* border: 2px solid #2F3645; */
     width: 100%;
+    font-size: 14px;
     text-align: center;
     padding: 20px;
-    color: rgb(90, 89, 89);
-}
-button:hover {
-    cursor: pointer;
+    color: rgb(54, 53, 53);
 }
 
+button {
+    background-color: #e5bfaf;
+    padding: 12px 25px;
+    color: rgb(56, 56, 56);
+    font-size: 15px;
+    border: none;
+    border-radius: 7px;
+    width: 170px;
+}
+
+
+button:hover {
+    cursor: pointer;
+    background-color:#e7a487;
+    color:white;
+}
+
+#size, #colours{
+    font-size: 17px;
+}
+
+#gridSize {
+    padding: 5px;
+    border-radius: 5px;
+}
