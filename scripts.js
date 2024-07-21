@@ -10,8 +10,9 @@ const reset = document.querySelector("#reset");
 const color = document.querySelector("#chooseColor");
 const shade = document.querySelector("#shading");
 
-let grids = 1;
+let grids = 16;
 let mode = '';
+let after = false;
 
 const getRandomColor = () => {
     var letters = '0123456789ABCDEF';
@@ -22,6 +23,8 @@ const getRandomColor = () => {
     return color;
   }
 
+
+  
 const addRows = (grids) => {
     for(let i=1; i<=grids; i++) {
         const row = document.createElement("div");
@@ -30,43 +33,53 @@ const addRows = (grids) => {
             const col = document.createElement("div");
             col.classList.add("col");
             row.appendChild(col);
-            col.addEventListener('mouseover', (e) => {
+
+            let normalListener = (e) => {
                 e.target.style.backgroundColor = color.value;
-            });
+            }
+            let rainbowListener;
+            let shadeListener;
+
+            //Default
+            col.addEventListener('mouseover', normalListener);
+
             // Normal Mode
-            normal.addEventListener("click", () => {
+            normal.addEventListener("click", function normalMode() {
                 mode = "normal";
-                col.addEventListener('mouseover', (e) => {
-                    e.target.style.backgroundColor = color.value;
-                });
+                if (shadeListener) col.removeEventListener('mouseover',shadeListener);
+                if (rainbowListener) col.removeEventListener('mouseover',rainbowListener);
+                col.addEventListener('mouseover', normalListener);
             });
             // Rainbow Mode
-            rainbow.addEventListener("click", () => {
+            rainbow.addEventListener("click", function rainbowMode() {
                 mode = "rainbow";
-                col.addEventListener('mouseover', (e) => {
-                    const randomColor = getRandomColor();
-                    e.target.style.backgroundColor = randomColor;
-                });
+                if(shadeListener) col.removeEventListener('mouseover',shadeListener);
+                rainbowListener = (e) => {
+                    e.target.style.backgroundColor = getRandomColor();
+                }
+                col.addEventListener('mouseover', rainbowListener);
             });
             // Shading mode
-            shade.addEventListener("click", () => {
+            shade.addEventListener("click", function shadeMode() {
                 let opacity = 0.2;
                 if(mode === "normal" || mode === '') {
-                    col.addEventListener('mouseover', (e) => {
+                    col.removeEventListener('mouseover', normalListener);
+                    shadeListener = (e) => {
                         e.target.style.backgroundColor = color.value;
                         e.target.style.opacity = opacity;
                         opacity += 0.1;
-                    })
-                }
+                    } 
+                }   
                 else if(mode === "rainbow") {
-                    col.addEventListener('mouseover', (e) => {
+                    col.removeEventListener('mouseover', rainbowListener);
+                    shadeListener = (e) => {
                         const randomColor = getRandomColor();
                         e.target.style.backgroundColor = randomColor;
                         e.target.style.opacity = opacity;
                         opacity += 0.1;
-                    });
+                    }
                 }
-                
+                col.addEventListener('mouseover', shadeListener);
             })
         }
         gridContainer.appendChild(row);
